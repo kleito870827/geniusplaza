@@ -23,7 +23,6 @@ onClickEditCard = (e) => {
             onClick={this.onClickEditCard}>
             <i className="fa fa-pencil-square-o" aria-hidden="true"></i>
           </button>
-          {/* <p>{card.description}</p> */}
         </div>
     )
   }
@@ -31,4 +30,3 @@ onClickEditCard = (e) => {
 
 
 export default connect(null, listActions)(Card);
-// export default Card;

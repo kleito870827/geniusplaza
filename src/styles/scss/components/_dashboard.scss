@@ -3,10 +3,12 @@
   justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
+  min-height: calc(100vh - 115px);
 
   &__addList{
     transition: background-color .3s ease;
     background-color: #026aa8;
+    display: inline-block;
     border-radius: 3px;
     box-sizing: border-box;
     width: 250px;

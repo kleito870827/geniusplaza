@@ -3,10 +3,9 @@ import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
+import { Container, Draggable } from 'react-smooth-dnd';
 
 import 'react-datepicker/dist/react-datepicker.css';
-
-// import { DragDropContainer, DropTarget } from 'react-drag-drop-container';
 
 // Actions
 import * as listActions from '../redux/actions/list';
@@ -19,15 +18,18 @@ Modal.setAppElement('#root');
 class Dashboard extends Component{
   state = {
     editList: '',
-    addListClass: 'close',
-    // startDate: moment()
+    addListClass: 'close'
   }
   onChangeAddList = e => {
     this.setState({editList: e.target.value});
   }
   onClickAddList = () => {
-    this.props.addList(this.state.editList);
-    this.onBlurAddList();
+    if(this.state.editList){
+      this.props.addList(this.state.editList);
+      this.onBlurAddList();
+    }else{
+      alert("The list can not be empty");
+    }
   }
 
   onFocusAddList = () => {
@@ -56,8 +58,12 @@ class Dashboard extends Component{
   }
 
   onClickSaveCard = e => {
-    this.props.editCard(e.currentTarget.dataset.cardid, e.currentTarget.dataset.lisid, this.props.curtCard);
-    this.props.closeModal();
+    if(this.props.curtCard.title){
+      this.props.editCard(e.currentTarget.dataset.cardid, e.currentTarget.dataset.lisid, this.props.curtCard);
+      this.props.closeModal();
+    }else{
+      alert("The title of card can not be empty");
+    }
   }
 
   handleChange = date => {
@@ -65,34 +71,45 @@ class Dashboard extends Component{
     // this.setState({startDate: date});
   }
 
+  onListDrop = (dropResult) => {
+    this.props.dropList(dropResult);
+  }
+
   render(){
-    // console.log(this.props.list);
-    // console.log(this.props.curtCard.description);
     return(
       <div className="dashboard">
-        {this.props.lists.map((list) => (<List key={list.id} listElement={list} removeList={this.props.removeList} removeCard={this.props.removeCard} addCard={this.props.addCard} />))}
-        <div
-          className={`dashboard__addList dashboard__addList--${this.state.addListClass}`}
-          // onBlur={ this.onBlurAddList }
+        <Container
+          orientation="horizontal"
+          onDrop={this.onListDrop}
           >
-          <span className="dashboard__addList__span" onClick={ this.onFocusAddList }>+ Add another List</span>
-          <div className="dashboard__addList__add-list-options">
-            <input
-              type="text"
-              // defaultValue="+ Add another List"
-              value={this.state.editList}
-              onChange={this.onChangeAddList}
-              onKeyUp={this.onKeyUpAddList}
-            />
-            <button className="dashboard__addList__add-list-options__btn-add-list" onClick={this.onClickAddList}>Add List</button>
-            <button className="dashboard__addList__add-list-options__btn-close-list" onClick={this.onBlurAddList}><i className="fa fa-times-circle-o" aria-hidden="true"></i></button>
-          </div>
-        </div>
-
-        {/* <button onClick={this.props.openModal}>Open Modal</button> */}
+          {this.props.lists.map(list => {
+            return (
+              <Draggable key={list.id}>
+                <List key={list.id}
+                  listElement={list}
+                 />
+              </Draggable>
+            );
+          })}
+          <div
+            className={`dashboard__addList dashboard__addList--${this.state.addListClass}`}
+            // onBlur={ this.onBlurAddList }
+            >
+              <span className="dashboard__addList__span" onClick={ this.onFocusAddList }>+ Add another List</span>
+              <div className="dashboard__addList__add-list-options">
+                <input
+                  type="text"
+                  value={this.state.editList}
+                  onChange={this.onChangeAddList}
+                  onKeyUp={this.onKeyUpAddList}
+                />
+                <button className="dashboard__addList__add-list-options__btn-add-list" onClick={this.onClickAddList}>Add List</button>
+                <button className="dashboard__addList__add-list-options__btn-close-list" onClick={this.onBlurAddList}><i className="fa fa-times-circle-o" aria-hidden="true"></i></button>
+              </div>
+            </div>
+        </Container>
         <Modal
           isOpen={this.props.cardOpenModal}
-          onRequestClose={this.props.closeModal}
           onRequestClose={this.props.closeModal}
           className="modal"
           overlayClassName="overlay"

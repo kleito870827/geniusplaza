@@ -77,3 +77,43 @@ export const editCard = (cardId, listId, card) => ({
   listId,
   card
 })
+
+// DROP_CARD
+export const dropCard = (listId, dropResult) => ({
+  type: 'DROP_CARD',
+  listId,
+  dropResult
+})
+
+// GET_CARD_DRAG
+export const getCardDrag= (listId, index) => ({
+  type: 'GET_CARD_DRAG',
+  listId,
+  index
+})
+
+// DROP_LIST
+export const dropList = dropResult => ({
+  type: 'DROP_LIST',
+  dropResult
+})
+
+export const applyDrag = (arr, dragResult, currentCard) => {
+  const { removedIndex, addedIndex, payload } = dragResult;
+  if (removedIndex === null && addedIndex === null) return arr;
+
+  const result = [...arr];
+  let itemToAdd = payload;
+
+  if (removedIndex !== null) {
+    itemToAdd = result.splice(removedIndex, 1)[0];
+  }else{
+    itemToAdd = currentCard;
+  }
+
+  if (addedIndex !== null) {
+    result.splice(addedIndex, 0, itemToAdd);
+  }
+
+  return result;
+};

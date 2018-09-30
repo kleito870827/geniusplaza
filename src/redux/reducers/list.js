@@ -1,3 +1,5 @@
+import {applyDrag} from '../actions/list';
+
 const defaultState = {
   listArray: [],
   currentCard: {
@@ -6,6 +8,11 @@ const defaultState = {
     description: '',
     listId: '',
     dueDate: ''
+  },
+  getCard: {
+    listId: '',
+    index: '',
+    currentCardObj: {}
   },
   cardOpenModal: false
 }
@@ -36,7 +43,6 @@ export default (state = defaultState, action) => {
           return list;
         }
       })
-      // console.log(newCard);
       return {
         ...state,
         listArray: newCard
@@ -73,7 +79,6 @@ export default (state = defaultState, action) => {
       const getList = state.listArray.filter((list) => {
         return list.id === action.listId;
       })[0];
-      // console.log(getList);
       const getCard = getList.cardArray.filter((card) => {
           return card.cardId === action.cardId;
       })[0]
@@ -136,7 +141,48 @@ export default (state = defaultState, action) => {
         ...state,
         listArray: editCard
       }
+    case 'GET_CARD_DRAG':
+      const curList = state.listArray.filter(p => p.id === action.listId)[0];
+      const currentCardObj =  curList.cardArray[action.index];
 
+      return{
+        ...state,
+        getCard: {
+          listId: action.listId,
+          index: action.index,
+          currentCardObj
+        }
+    }
+    case 'DROP_CARD':
+      if (action.dropResult.removedIndex !== null || action.dropResult.addedIndex !== null) {
+
+        const listArray = Object.assign([], state.listArray);
+
+        const column = listArray.filter(p => p.id === action.listId)[0];
+        const columnIndex = listArray.indexOf(column);
+
+        const newColumn = Object.assign({}, column);
+        newColumn.cardArray = applyDrag(newColumn.cardArray, action.dropResult, state.getCard.currentCardObj);
+
+        listArray.splice(columnIndex, 1, newColumn);
+
+        return{
+          ...state,
+          listArray
+        }
+      }else{
+        return state;
+      }
+    case 'DROP_LIST':
+
+    const list = Object.assign([], state.listArray);
+
+    const listArray = applyDrag(list, action.dropResult);
+
+      return {
+        ...state,
+        listArray
+      }
 
     default:
       return state;
