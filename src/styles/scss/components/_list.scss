@@ -1,0 +1,136 @@
+.list{
+  background-color: #dfe3e6;
+  border-radius: 3px;
+  box-sizing: border-box;
+  width: 250px;
+  margin: 10px;
+  padding: 15px;
+
+  &__list-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    &__input{
+      border: 1px solid #dfe3e6;
+      color: #026aa8;
+      background-color: transparent;
+      font-size: 1.6rem;
+      cursor: pointer;
+      font-weight: 500;
+      width: 100%;
+      display: block;
+      margin-bottom: 10px;
+
+      &:focus{
+        background: #fff;
+        border: 1px solid #5ba4cf;
+        box-shadow: 0 0 0 1px #5ba4cf;
+        transition: margin 85ms ease-in,background 85ms ease-in;
+      }
+    }
+
+    &__remove-btn{
+      background-color: transparent;
+      border: none;
+      color: #798d99;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      cursor: pointer;
+      position: relative;
+      top: -7px;
+    }
+  }
+
+  &__add-card{
+     background-color: #dfe3e6;
+     margin-top: 10px;
+
+    &__span{
+      transition: background-color .3s ease;
+      color: #6b808c;
+      cursor: pointer;
+      font-weight: 300;
+      width: 100%;
+      display: block;
+      font-size: 1.6rem;
+      background: #dfe3e6;
+      padding: 10px;
+      box-sizing: border-box;
+      border-radius: 3px;
+
+      &:hover{
+        background-color: rgba(9,45,66,.13);
+      }
+    }
+
+    &__option{
+      display: none;
+
+      input{
+        transition: all .3s ease;
+        border: 0;
+        background-color: #fff;
+        color: #046ba8;
+        font-size: 1.6rem;
+        cursor: pointer;
+        font-weight: 300;
+        width: 100%;
+        display: block;
+        height: 20px;
+        border-radius: 3px;
+        box-sizing: border-box;
+        padding: 10px;
+        height: 30px;
+      }
+
+      &__btn-add-card{
+        background-color: #5aac44;
+        box-shadow: 0 1px 0 0 #3f6f21;
+        border: none;
+        border-radius: 3px;
+        color: #fff;
+        cursor: pointer;
+        display: inline-block;
+        font-weight: 700;
+        line-height: 20px;
+        margin: 8px 4px 0 0;
+        padding: 6px 12px;
+        text-align: center;
+        font-size: 1.4rem;
+      }
+      &__btn-close-card{
+        background-color: transparent;
+        border: none;
+        color: #798d99;
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 700;
+        cursor: pointer;
+        display: inline-block;
+        position: relative;
+        top: 4px;
+      }
+    }
+
+    &--close{
+      .list__add-card__option{
+        display: none;
+      }
+      .list__add-card__span{
+        display: block;
+      }
+    }
+    &--open{
+      .list__add-card__option{
+        display: block;
+        margin-top: 30px;
+      }
+      .list__add-card__span{
+        display: none;
+      }
+    }
+  }
+
+}
