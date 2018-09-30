@@ -11,16 +11,16 @@ You are being asked to implement a Drag and Drop Note Page.  Something in the de
 This project is a chance to show off your skills.  There are no specific requirements just a general outline of what to create.  You are not expected to complete all of the features and extra credit.  Please do not spend more than 8 hours on the project.
 
 Features are up to you but could include things such as:
-✓ add list
-✓ remove list
-✓ add card
-✓ edit card
-✓ remove card
-✓ card descriptions
-✓ drag card to new list
+* ✓ add list
+* ✓ remove list
+* ✓ add card
+* ✓ edit card
+* ✓ remove card
+* ✓ card descriptions
+* ✓ drag card to new list
 * attach image to card
-✓ set card due date
-✓ responsive design
+* ✓ set card due date
+* ✓ responsive design
 
 
 ## Getting Started
@@ -64,6 +64,6 @@ If you have some time left over feel free to take a stab at the extra credit
 			token
 		}
 * Create endpoints in server.js to save and retrieve your board progress.  Make sure to send along your auth token to incorporate different boards for different users.  Feel free to design the data in whatever way you see fit.
-✓ Add SASS or LESS support
+* ✓ Add SASS or LESS support
 
 <!-- *There is no need to create a separate application, you can implement routing or any other mechanism you're familiar with to incorporate both projects in the repo* -->
