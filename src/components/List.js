@@ -68,7 +68,6 @@ class List extends Component {
             <button className="list__list-title__remove-btn" data-lisid={this.props.listElement.id} onClick={this.onClickRemoveList}><i className="fa fa-times-circle-o" aria-hidden="true"></i></button>
         </div>
         <Container
-          onDrop={this.props.onDrop}
           groupName="card"
           onDragStart={() => this.setState({onDrag: true})}
           onDragEnd={() => this.setState({onDrag: false})}

@@ -35,7 +35,6 @@ class AddBtn extends Component {
         <div className="dashboard__addList__add-list-options">
           <input
             type="text"
-            // defaultValue="+ Add another List"
             value={this.state.editInput}
             onChange={this.onChangeAddInput}
             onKeyUp={this.onKeyUpInput}

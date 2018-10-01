@@ -4,7 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import createHistory from 'history/createBrowserHistory';
 
-// components
+// Components
 import Dashboard from '../components/Dashboard';
 import Page404 from '../components/Page404';
 
